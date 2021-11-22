@@ -3,23 +3,66 @@
 /*                                                        :::      ::::::::   */
 /*   print_types.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnaftana <jnaftana@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: jnaftana <jnaftana@student.42madrid.es>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/23 11:55:57 by jnaftana          #+#    #+#             */
-/*   Updated: 2021/10/23 12:30:47 by jnaftana         ###   ########.fr       */
+/*   Updated: 2021/11/16 13:44:17 by jnaftana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
 /*
- * Prints in:
- * Decimal - if num is not preceded by anything.
- * Octal - if num is preceded by zero.
- * 
- */
-
-void p_type_num(int octal_num, size_t *ptr_n_printed)
+ * Prints a char, then updates the number of characters printed.
+*/
+void	p_char(char c, size_t *ptr_n_printed)
 {
+	ft_putchar_fd(c, 1);
+	*ptr_n_printed += 1;
+}
 
+/*
+ * Prints a string, then updates the number of characters printed.
+*/
+void	p_str(char *str, size_t *ptr_n_printed)
+{
+	ft_putstr_fd(str, 1);
+	*ptr_n_printed += ft_strlen(str);
+}
+
+void	p_int(int num, size_t *ptr_n_printed)
+{
+	char	*n_str;
+	
+	n_str = ft_itoa(num);
+	ft_putstr_fd(n_str, 1);
+	*ptr_n_printed += ft_strlen(n_str);
+}
+
+void	p_uint(unsigned int num, size_t *ptr_n_printed)
+{
+	char	*n_str;
+
+	n_str = ft_utoa(num);
+	ft_putstr_fd(n_str, 1);
+	*ptr_n_printed += ft_strlen(n_str);
+}
+
+void	p_hex(unsigned int num, size_t *ptr_n_printed)
+{
+	char	*n_str;
+
+	n_str = ft_hextoa(num);
+	ft_putstr_fd(n_str, 1);
+	*ptr_n_printed += ft_strlen(n_str);
+}
+
+void	p_hexup(unsigned int num, size_t *ptr_n_printed)
+{
+	char	*n_str;
+
+	n_str = ft_hextoa(num);
+	n_str = ft_toupper(n_str);
+	ft_putstr_fd(n_str, 1);
+	*ptr_n_printed += ft_strlen(n_str);
 }

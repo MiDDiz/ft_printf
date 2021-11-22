@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnaftana <jnaftana@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: jnaftana <jnaftana@student.42madrid.es>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/21 15:34:45 by jnaftana          #+#    #+#             */
-/*   Updated: 2021/10/23 12:23:02 by jnaftana         ###   ########.fr       */
+/*   Updated: 2021/11/16 18:06:09 by jnaftana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,15 +114,9 @@ void	args_handler(char arg_type, va_list v_args, size_t *ptr_n_printed)
 	else if (arg_type == 'u')
 		p_uint(va_arg(v_args, unsigned int), *ptr_n_printed);
 	else if (arg_type == 'x')
-	{
-		p_hex(va_arg(v_args, unsigned int), *ptr_n_printed)
-	}
+		p_hex(va_arg(v_args, unsigned int), *ptr_n_printed);
 	else if (arg_type == 'X')
-	{
-		
-	}
+		p_hexup(va_arg(v_args, unsigned int), *ptr_n_printed);
 	else if (arg_type == '%')
-	{
-		
-	}
+		p_perc(*ptr_n_printed);
 }
