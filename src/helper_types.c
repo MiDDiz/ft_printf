@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_types.c                                      :+:      :+:    :+:   */
+/*   helper_types.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jnaftana <jnaftana@student.42madrid.es>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/23 11:55:57 by jnaftana          #+#    #+#             */
-/*   Updated: 2021/11/16 13:44:17 by jnaftana         ###   ########.fr       */
+/*   Updated: 2021/11/23 17:56:13 by jnaftana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "../includes/ft_printf.h"
 
 /*
  * Prints a char, then updates the number of characters printed.
@@ -35,34 +35,6 @@ void	p_int(int num, size_t *ptr_n_printed)
 	char	*n_str;
 	
 	n_str = ft_itoa(num);
-	ft_putstr_fd(n_str, 1);
-	*ptr_n_printed += ft_strlen(n_str);
-}
-
-void	p_uint(unsigned int num, size_t *ptr_n_printed)
-{
-	char	*n_str;
-
-	n_str = ft_utoa(num);
-	ft_putstr_fd(n_str, 1);
-	*ptr_n_printed += ft_strlen(n_str);
-}
-
-void	p_hex(unsigned int num, size_t *ptr_n_printed)
-{
-	char	*n_str;
-
-	n_str = ft_hextoa(num);
-	ft_putstr_fd(n_str, 1);
-	*ptr_n_printed += ft_strlen(n_str);
-}
-
-void	p_hexup(unsigned int num, size_t *ptr_n_printed)
-{
-	char	*n_str;
-
-	n_str = ft_hextoa(num);
-	n_str = ft_toupper(n_str);
 	ft_putstr_fd(n_str, 1);
 	*ptr_n_printed += ft_strlen(n_str);
 }

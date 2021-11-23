@@ -6,11 +6,11 @@
 /*   By: jnaftana <jnaftana@student.42madrid.es>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/21 15:34:45 by jnaftana          #+#    #+#             */
-/*   Updated: 2021/11/16 18:06:09 by jnaftana         ###   ########.fr       */
+/*   Updated: 2021/11/23 17:56:16 by jnaftana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "../includes/ft_printf.h"
 
 /*
  * This is the main function. The starting point of ft_printf.
@@ -25,14 +25,14 @@
 
 int	ft_printf(const char *str, ...)
 {
-	size_t	n_args;
+	size_t	size;
 	va_list	v_args;
 	size_t	n_print_char;
 
 	n_print_char = 0;
-	n_args = get_num_args(str);
-	va_start(v_args, n_args);
-	printf_handler(str, v_args, n_args, &n_print_char);
+	size = get_num_args(str);
+	va_start(v_args, str);
+	printf_handler(str, v_args, &n_print_char, size);
 	va_end(v_args);
 	return (n_print_char);
 }
@@ -73,10 +73,9 @@ size_t	get_num_args(char const *str)
  * 		
 */
 
-void	printf_handler (const char *str, va_list v_args, size_t n_args, size_t *ptr_n_printed)
+void	printf_handler (const char *str, va_list v_args, size_t *ptr_n_printed, size_t n_params)
 {
 	char	*ptr_str;
-	void	*ptr_arg;
 
 	ptr_str = (char *)str;
 	while (*ptr_str)
@@ -84,7 +83,7 @@ void	printf_handler (const char *str, va_list v_args, size_t n_args, size_t *ptr
 		if (*ptr_str == '%' && is_arg(*(ptr_str + 1)))
 		{
 			ptr_str++;
-
+			n_params--;
 			args_handler(*ptr_str, v_args, ptr_n_printed);
 			ptr_str++;
 		}
@@ -104,19 +103,19 @@ void	printf_handler (const char *str, va_list v_args, size_t n_args, size_t *ptr
 void	args_handler(char arg_type, va_list v_args, size_t *ptr_n_printed)
 {
 	if (arg_type == 'c')
-		p_char(va_arg(v_args, char), *ptr_n_printed);
+		p_char((char) va_arg(v_args, int), ptr_n_printed);
 	else if (arg_type == 's')
-		p_str(va_arg(v_args, char *), *ptr_n_printed);
-	else if (arg_type == 'p')
-		p_addr(va_arg(v_args, void *), *ptr_n_printed);
+		p_str(va_arg(v_args, char *), ptr_n_printed);
 	else if (arg_type == 'd' || arg_type == 'i')
-		p_int(va_arg(v_args, int), *ptr_n_printed);
+		p_int(va_arg(v_args, int), ptr_n_printed);
 	else if (arg_type == 'u')
-		p_uint(va_arg(v_args, unsigned int), *ptr_n_printed);
+		p_uint(va_arg(v_args, unsigned int), ptr_n_printed);
 	else if (arg_type == 'x')
-		p_hex(va_arg(v_args, unsigned int), *ptr_n_printed);
+		p_hex(va_arg(v_args, unsigned int), ptr_n_printed);
 	else if (arg_type == 'X')
-		p_hexup(va_arg(v_args, unsigned int), *ptr_n_printed);
+		p_hexup(va_arg(v_args, unsigned int), ptr_n_printed);
+	else if (arg_type == 'p')
+		p_hexup((size_t) va_arg(v_args, void *), ptr_n_printed);
 	else if (arg_type == '%')
-		p_perc(*ptr_n_printed);
+		p_char('%', ptr_n_printed);
 }
