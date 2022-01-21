@@ -6,7 +6,7 @@
 /*   By: jnaftana <jnaftana@student.42madrid.es>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/21 15:45:26 by jnaftana          #+#    #+#             */
-/*   Updated: 2021/11/23 17:56:52 by jnaftana         ###   ########.fr       */
+/*   Updated: 2022/01/21 12:07:36 by jnaftana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,4 +29,5 @@ void	p_int(int num, size_t *ptr_n_printed);
 void	p_uint(unsigned int num, size_t *ptr_n_printed);
 void	p_hex(size_t num, size_t *ptr_n_printed);
 void	p_hexup(size_t num, size_t *ptr_n_printed);
+void	p_point(size_t num, size_t *ptr_n_printed);
 #endif

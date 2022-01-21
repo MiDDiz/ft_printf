@@ -6,7 +6,7 @@
 /*   By: jnaftana <jnaftana@student.42madrid.es>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/21 15:34:45 by jnaftana          #+#    #+#             */
-/*   Updated: 2021/11/23 17:56:16 by jnaftana         ###   ########.fr       */
+/*   Updated: 2022/01/21 12:05:09 by jnaftana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,7 @@ void	args_handler(char arg_type, va_list v_args, size_t *ptr_n_printed)
 	else if (arg_type == 'X')
 		p_hexup(va_arg(v_args, unsigned int), ptr_n_printed);
 	else if (arg_type == 'p')
-		p_hexup((size_t) va_arg(v_args, void *), ptr_n_printed);
+		p_point((size_t) va_arg(v_args, void *), ptr_n_printed);
 	else if (arg_type == '%')
 		p_char('%', ptr_n_printed);
 }

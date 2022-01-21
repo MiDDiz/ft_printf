@@ -6,7 +6,7 @@
 /*   By: jnaftana <jnaftana@student.42madrid.es>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/23 11:55:57 by jnaftana          #+#    #+#             */
-/*   Updated: 2021/11/23 17:56:13 by jnaftana         ###   ########.fr       */
+/*   Updated: 2022/01/21 12:09:48 by jnaftana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,16 @@ void	p_char(char c, size_t *ptr_n_printed)
 
 /*
  * Prints a string, then updates the number of characters printed.
+ * For NULL strings printf prints the sequence : "(null)"
 */
 void	p_str(char *str, size_t *ptr_n_printed)
 {
+	if (str == NULL)
+	{
+		ft_putstr_fd("(null)", 1);
+		*ptr_n_printed += 6;
+		return ;
+	}
 	ft_putstr_fd(str, 1);
 	*ptr_n_printed += ft_strlen(str);
 }
@@ -37,4 +44,5 @@ void	p_int(int num, size_t *ptr_n_printed)
 	n_str = ft_itoa(num);
 	ft_putstr_fd(n_str, 1);
 	*ptr_n_printed += ft_strlen(n_str);
+	free(n_str);
 }

@@ -5,50 +5,46 @@
 #                                                     +:+ +:+         +:+      #
 #    By: jnaftana <jnaftana@student.42madrid.es>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2021/10/21 15:45:23 by jnaftana          #+#    #+#              #
-#    Updated: 2021/11/23 17:58:49 by jnaftana         ###   ########.fr        #
+#    Created: 2022/01/21 11:02:32 by jnaftana          #+#    #+#              #
+#    Updated: 2022/01/21 11:02:32 by jnaftana         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME	= libftprintf.a
+NAME = libftprintf.a
+PRINTDIR = src
+LIBDIR = libft
 
-SRCS		= ft_printf.c helper_types.c helper_types_2.c
-LIB_SRCS	= ft_putchar_fd.c ft_putstr_fd.c ft_strlen.c ft_itoa.c ft_calloc.c \
-				ft_strlcat.c ft_bzero.c ft_strlcpy.c ft_utoa.c ft_strupper.c \
-				ft_toupper.c ft_hextoa.c
+SRCS = $(PRINTDIR)/ft_printf.c \
+		$(PRINTDIR)/helper_types.c \
+		$(PRINTDIR)/helper_types_2.c \
+		$(LIBDIR)/ft_putchar_fd.c \
+		$(LIBDIR)/ft_putstr_fd.c \
+		$(LIBDIR)/ft_strlen.c \
+		$(LIBDIR)/ft_itoa.c \
+		$(LIBDIR)/ft_calloc.c \
+		$(LIBDIR)/ft_strlcat.c \
+		$(LIBDIR)/ft_bzero.c \
+		$(LIBDIR)/ft_strlcpy.c \
+		$(LIBDIR)/ft_utoa.c \
+		$(LIBDIR)/ft_strupper.c \
+		$(LIBDIR)/ft_toupper.c \
+		$(LIBDIR)/ft_hextoa.c
 
-OBJS		= ${SRCS:.c=.o}
-LIB_OBJS	= ${LIB_SRCS:.c=.o}
-
-LIB_PATH	= libft
-SRC_PATH	= src
-INCLUDES_PATH = includes
-INCLUDE_PF = ft_printf.h
-INCLUDE_LFT = libft.h
-
-LIB			= $(addprefix $(LIB_PATH)/, $(LIB_OBJS))
-SRC			= $(addprefix $(SRC_PATH)/, $(OBJS))
-PF_LIB		= $(addprefix $(INCLUDES_PATH)/, $(INCLUDE_PF))
-LFT_LIB		= $(addprefix $(LIB_PATH)/, $(INCLUDE_LFT))
-
-CC		= clang
-RM		= rm -f
+OBJS =	$(SRCS:.c=.o)
 CFLAGS	= -Wall -Wextra -Werror
-AR		= ar
-RC		= rc
-				
-all:			${NAME}
 
-${NAME}:		$(SRC) $(LFT) $(PF_LIB) $(LFT_LIB)
-				${AR} ${RC} ${NAME} $(SRC) $(LFT)
+all:	$(NAME)
 
 %.o: %.c
 	gcc $(CFLAGS) -c -o $@ $<
 
+$(NAME):	$(OBJS)
+	ar -rcv $@ $^
+
 clean:
-				${RM} ${OBJS} $(OBJS_B)
+	rm -f ${OBJS}
 
-fclean:			clean
-				${RM} ${NAME}
+fclean:	clean
+	rm -f ${NAME}
 
-re:				fclean all
+re:	fclean all
