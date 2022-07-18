@@ -6,7 +6,7 @@
 /*   By: jnaftana <jnaftana@student.42madrid.es>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/23 11:55:57 by jnaftana          #+#    #+#             */
-/*   Updated: 2022/01/21 12:09:48 by jnaftana         ###   ########.fr       */
+/*   Updated: 2022/07/18 11:39:46 by jnaftana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	p_str(char *str, size_t *ptr_n_printed)
 void	p_int(int num, size_t *ptr_n_printed)
 {
 	char	*n_str;
-	
+
 	n_str = ft_itoa(num);
 	ft_putstr_fd(n_str, 1);
 	*ptr_n_printed += ft_strlen(n_str);

@@ -42,7 +42,7 @@ $(NAME):	$(OBJS)
 	ar -rcv $@ $^
 
 clean:
-	rm -f ${OBJS}
+	rm -f ${OBJS} libftprintf.a
 
 fclean:	clean
 	rm -f ${NAME}

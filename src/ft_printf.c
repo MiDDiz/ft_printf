@@ -6,7 +6,7 @@
 /*   By: jnaftana <jnaftana@student.42madrid.es>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/21 15:34:45 by jnaftana          #+#    #+#             */
-/*   Updated: 2022/01/21 12:05:09 by jnaftana         ###   ########.fr       */
+/*   Updated: 2022/07/18 11:39:20 by jnaftana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 /*
  * This is the main function. The starting point of ft_printf.
- * We use this to make all the calls to the methods that compose the functionality
- * of the main function.
+ * We use this to make all the calls to the methods that compose 
+ * the functionality of the main function.
  * 
- *  get_num_args -> Number of valid '%arg' instances in order to initialize v_args
+ *  get_num_args -> Number of valid '%arg'  in order to initialize v_args
  *  printf_handler -> main functionality
  * 
  *  return value: the number of characters printed.
@@ -69,35 +69,35 @@ size_t	get_num_args(char const *str)
  * 		str -> the main string
  * 		v_args -> the list of arguments passed
  * 		n_args -> the number of arguments passed (maybe unnecesary)
- * 		ptr_n_printd -> pointer to the size_t that stores the num of characters printed.
+ * 		ptr_n_printd -> ptr to the size_t which stores the num of chars printed.
  * 		
 */
 
-void	printf_handler (const char *str, va_list v_args, size_t *ptr_n_printed, size_t n_params)
+void	printf_handler(const char *s, va_list arg, size_t *n_prt, size_t n_arg)
 {
 	char	*ptr_str;
 
-	ptr_str = (char *)str;
+	ptr_str = (char *)s;
 	while (*ptr_str)
 	{
 		if (*ptr_str == '%' && is_arg(*(ptr_str + 1)))
 		{
 			ptr_str++;
-			n_params--;
-			args_handler(*ptr_str, v_args, ptr_n_printed);
+			n_arg--;
+			args_handler(*ptr_str, arg, n_prt);
 			ptr_str++;
 		}
 		else
 		{
 			ft_putchar_fd(*ptr_str, 1);
-			*ptr_n_printed += 1;
+			*n_prt += 1;
 			ptr_str++;
 		}
 	}
 }
 
 /*
- * 
+ * Control what type of printing is necesary
 */
 
 void	args_handler(char arg_type, va_list v_args, size_t *ptr_n_printed)
@@ -118,4 +118,15 @@ void	args_handler(char arg_type, va_list v_args, size_t *ptr_n_printed)
 		p_point((size_t) va_arg(v_args, void *), ptr_n_printed);
 	else if (arg_type == '%')
 		p_char('%', ptr_n_printed);
+}
+
+/*
+	Check if char given is an argument
+*/
+
+int	is_arg(char a)
+{
+	return ((a == 'c') || (a == 's') || (a == 'p') || \
+			(a == 'd') || (a == 'i') || (a == 'u') || \
+			(a == 'x') || (a == 'X') || (a == '%'));
 }
