@@ -39,7 +39,7 @@ all:	$(NAME)
 	gcc $(CFLAGS) -c -o $@ $<
 
 $(NAME):	$(OBJS)
-	ar -rcv $@ $^
+	ar -rcv ../../$@ $^
 
 clean:
 	rm -f ${OBJS} libftprintf.a
